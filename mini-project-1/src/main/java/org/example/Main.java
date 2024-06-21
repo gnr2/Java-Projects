@@ -1,5 +1,5 @@
 package org.example;
-import org.example.calculator.Calculator;
+import Classes.Calculator;
 import java.util.Scanner;
 
 public class Main {
