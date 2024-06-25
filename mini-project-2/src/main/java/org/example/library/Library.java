@@ -23,7 +23,7 @@ public class Library extends BookManager {
         Book book = new Book(bookTitle, bookAuthor, bookIsbn);
         book.setId(books.size() + 1);
         books.add(book);
-        log.info("{} by {} has been added to the list", book.getTitle(), book.getAuthor());
+        log.info("Added book: {} by {}, ISBN: {}", book.getTitle(), book.getAuthor(), book.getISBN());
     }
 
     @Override
