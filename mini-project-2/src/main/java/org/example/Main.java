@@ -84,7 +84,6 @@ public class Main {
                                 }
 
                                 lib.addBook(book_title, book_author, book_isbn);
-                                log.info("Added book: {} by {}, ISBN: {}", book_title, book_author, book_isbn);
                                 isValid = true;
 
                             } catch (IllegalArgumentException e) {
