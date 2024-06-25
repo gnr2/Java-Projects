@@ -1,15 +1,26 @@
 package org.example.library;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
     private Library library;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @Before
     public void setUp() {
         library = new Library();
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(originalOut);
     }
 
     @Test
@@ -31,27 +42,31 @@ public class LibraryTest {
     public void testSearchBookByTitle() {
         library.addBook("Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
         library.searchBook(1, "Java");
-        // You can enhance this test by capturing console output or modifying searchBook to return results
+        String expectedOutput = String.format("%-10d%-25s%-25s%-50s%n", 1, "Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
+        assertTrue(outContent.toString().contains(expectedOutput));
     }
 
     @Test
     public void testSearchBookByAuthor() {
         library.addBook("Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
         library.searchBook(2, "Ken");
-        // Similar to above, capture or check output/results
+        String expectedOutput = String.format("%-10d%-25s%-25s%-50s%n", 1, "Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
+        assertTrue(outContent.toString().contains(expectedOutput));
     }
 
     @Test
     public void testSearchBookByIsbn() {
         library.addBook("Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
         library.searchBook(3, "0201704331");
-        // Similar to above, capture or check output/results
+        String expectedOutput = String.format("%-10d%-25s%-25s%-50s%n", 1, "Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
+        assertTrue(outContent.toString().contains(expectedOutput));
     }
 
     @Test
     public void testListBooks() {
         library.addBook("Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
         library.listBooks();
-        // Ensure the listBooks method works as expected
+        String expectedOutput = String.format("%-10d%-25s%-25s%-50s%n", 1, "Java Programming Language 2nd Edition", "Ken Arnold", "0201704331");
+        assertTrue(outContent.toString().contains(expectedOutput));
     }
 }
