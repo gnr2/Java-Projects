@@ -7,15 +7,6 @@ public class Book {
     private String isbn;
 
     public Book(String title, String author, String isbn){
-        if(title == null || title.isEmpty()){
-            throw new IllegalArgumentException("Title cannot be null or empty");
-        }
-        if(author == null || author.isEmpty()){
-            throw new IllegalArgumentException("Title cannot be null or empty");
-        }
-        if(isbn == null || isbn.isEmpty()){
-            throw new IllegalArgumentException("Title cannot be null or empty");
-        }
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -29,10 +20,6 @@ public class Book {
         this.id = id;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getAuthor(){
         return author;
     }
@@ -41,17 +28,10 @@ public class Book {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getISBN() {
         return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.isbn = isbn;
-    }
 
 
 
