@@ -3,6 +3,8 @@
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+/SystemLogs.log
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml

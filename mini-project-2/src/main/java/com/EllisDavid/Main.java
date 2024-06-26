@@ -59,7 +59,7 @@ public class Main {
             switch (user_option) {
                 case 1:
                     // Use case for displaying the list of books
-                    System.out.println('\n');
+                    System.out.println();
                     lib.listBooks();
                     System.out.print("\nPress Enter to Continue...");
                     scan.nextLine();

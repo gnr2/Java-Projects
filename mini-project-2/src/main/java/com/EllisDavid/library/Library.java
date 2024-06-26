@@ -38,6 +38,7 @@ public class Library extends BookManager {
             }
         }
         books.add(book);
+        System.out.println(book.getTitle() + " by " + book.getAuthor() + " has been successfully added to the library.");
         log.info("Added book: {} by {}, ISBN: {}", book.getTitle(), book.getAuthor(), book.getISBN());
     }
 
@@ -136,6 +137,7 @@ public class Library extends BookManager {
             for (Book book : books) {
                 System.out.println(String.format("%-10d%-35s%-25s%-50s", book.getId(), book.getTitle(), book.getAuthor(), book.getISBN()));
             }
+            System.out.println("\nTotal number of books un the system: " + books.size());
             log.info("Total number of books in the system: {}", books.size());
         }
 
