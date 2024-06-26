@@ -24,13 +24,12 @@ This project is a simple library management system implemented in Java. It allow
    Maven toolbar in Intelli J mini-project-2/lifecycle/ and 
    double click install to run the command. 
 
-
 ## Usage
 Run the application using the following command:
 ```sh
 mvn exec:java -Dexec.mainClass="com.EllisDavid.Main"
 ```
-or simply run the application from the run tool on Intelli J
+or simply execute the application from the Maven toolbar on Intelli J, navigate to `mini-project-2 > Plugins > exec > exect:java`
 
 ## Testing
 Run the tests using the following command:
