@@ -12,6 +12,7 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
+        // Variable declaration
         int user_option;
         char exit_choice;
         char redo_choice;
@@ -21,10 +22,12 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         do {
+            // Assignment of initial values to prevent error
             redo_choice = '\0';
             isValid = false;
             user_option = 0;
 
+            // Loop to ensure user inputs the correct choice for action
             while (!isValid) {
                 System.out.println();
                 lib.printShortDivider();
@@ -48,19 +51,21 @@ public class Main {
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                     log.error("Error in user input: {}", e.getMessage());
-                    scan.nextLine(); // clear the buffer
+                    scan.nextLine();
                 }
             }
             lib.printLongDivider();
 
             switch (user_option) {
                 case 1:
+                    // Use case for displaying the list of books
                     System.out.println('\n');
                     lib.listBooks();
                     System.out.print("\nPress Enter to Continue...");
                     scan.nextLine();
                     break;
                 case 2:
+                    // Use case for adding a new book to the list
                     do {
                         isValid = false;
                         while (!isValid) {
@@ -92,6 +97,7 @@ public class Main {
                             }
                         }
 
+                        // Code block for add again
                         isValid = false;
                         while (!isValid) {
                             try {
@@ -114,8 +120,9 @@ public class Main {
                     } while (redo_choice == 'Y');
                     break;
                 case 3:
+                    // Use case for book search and remove
                     int search_option;
-                    boolean innerIsValid = false;
+                    boolean innerIsValid;
                     do {
                         search_option = 0;
                         isValid = false;
@@ -148,6 +155,7 @@ public class Main {
                         System.out.print("\nWhat would you like to do next?\n[1] Delete\n[2] " +
                                 "Search again\n[3] Back to Menu\n\nChoose: ");
 
+                        // Additional options (1. Remove, 2. Search, 3. Exit)
                         isValid = false;
                         while (!isValid) {
                             try {
@@ -217,6 +225,7 @@ public class Main {
                     } while (redo_choice == 'Y');
                     break;
                 case 4:
+                    // Use case to exit the program
                     isValid = false;
                     while (!isValid) {
                         try {

@@ -1,5 +1,7 @@
 package org.example.library;
 
+// Class for the Book object
+
 public class Book {
     private int id;
     private String title;

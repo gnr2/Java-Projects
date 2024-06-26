@@ -1,5 +1,7 @@
 package org.example.library;
 
+// Abstract class containing the functions for library
+
 public abstract class BookManager {
 
     public abstract void addBook(String book_title, String book_author, String book_isbn);
