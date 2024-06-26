@@ -21,8 +21,8 @@ This project is a simple library management system implemented in Java. It allow
    mvn clean install
    ```
    or navigate to
-   Maven toolbar in Intelli J mini-project-2/lifecycle/ and 
-   double click install to run the command. 
+   Maven toolbar in Intelli J `mini-project-2 > lifecycle > clean` and 
+   `mini-project-2 > lifecycle > install` to build the project. 
 
 ## Usage
 Run the application using the following command:
@@ -37,4 +37,4 @@ Run the tests using the following command:
 ```sh
 mvn test
 ```
-With Intelli J you can navigate through the Maven toolbar - mini-project-2/Lifecycle/ to run the test command file.
+With Intelli J you can navigate through the Maven toolbar - `mini-project-2 > Lifecycle > test` to run the test command file.
