@@ -1,4 +1,4 @@
-package org.example.library;
+package com.EllisDavid.library;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

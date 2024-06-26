@@ -1,6 +1,6 @@
-package org.example;
+package com.EllisDavid;
 
-import org.example.library.Library;
+import com.EllisDavid.library.Library;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -129,7 +129,7 @@ public class Main {
                         innerIsValid = false;
                         while (!isValid) {
                             try {
-                                System.out.print("\nSearch by\n[1] Book Name\n[2] Book Author" +
+                                System.out.print("\nSearch by\n[1] Book Title\n[2] Book Author" +
                                         "\n[3] Book ISBN\n\nChoose: ");
                                 if (scan.hasNextInt()) {
                                     search_option = scan.nextInt();
