@@ -1,21 +1,20 @@
 package org.David.service.Impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.David.model.CartItem;
-import org.David.model.Product;
+import lombok.Getter;
+import lombok.Setter;
+import org.David.model.ProductItem;
 import org.David.service.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Getter @Setter
 public class CartServiceImpl implements CartService{
     private static final Logger log = LoggerFactory.getLogger(CartServiceImpl.class);
-    private  ArrayList <CartItem> cart;
+    private HashMap<ProductItem, Integer> cart = new HashMap<>();
     private static CartServiceImpl instance;
-
-    private CartServiceImpl(){
-        cart = new ArrayList<>();
-    }
 
     public static synchronized CartServiceImpl getInstance(){
         if (instance == null){
@@ -25,18 +24,17 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public ArrayList<CartItem> getCart() {
-        return cart;
-    }
-
-    @Override
     public void viewCart(){
         int totalPrice = 0;
         log.info("User viewed items in cart");
         System.out.println("Items in Cart:");
-        for (CartItem item : cart){
-            System.out.println(item.getQuantity() + " - " + item.getProduct().getProductName() + " " + item.getProduct().getProductPrice() * item.getQuantity());
-            totalPrice += (item.getProduct().getProductPrice() * (double)item.getQuantity());
+
+        for(var item: cart.keySet()){
+            System.out.println("Product ID: " + item.getProductId());
+            System.out.println("Product Name: " + item.getProductName());
+            System.out.println("Product Price: " + item.getProductPrice());
+            System.out.println("Quantity: " + cart.get(item));
+            totalPrice += item.getProductPrice();
         }
 
         if (totalPrice != 0) {
@@ -48,52 +46,17 @@ public class CartServiceImpl implements CartService{
         }
     }
 
-    @Override
-    public void addItemToCart(Product itemToCart, int quantity){
-        CartServiceImpl cart = CartServiceImpl.getInstance();
-        boolean itemIsInList = false;
-
-        for(CartItem item : cart.getCart()){
-            if (itemToCart.getProductId() == item.getProduct().getProductId()){
-                item.setQuantity(item.getQuantity() + quantity);
-                itemIsInList = true;
-                break;
-            }
+    public void addItemToCart(ProductItem item, int quantity){
+        Integer itemValue = cart.get(item);
+        if(itemValue == null){
+            cart.put(item, quantity  );
+        }else{
+            cart.put(item, cart.get(item) + quantity  );
         }
-        if(!itemIsInList) {
-            CartItem item = new CartItem(itemToCart, quantity);
-            cart.getCart().add(item);
-        }
-
     }
 
-    // add quantity only if item is already in cart
-    @Override
-    public void selectItem(int productId, int quantity, ArrayList<Product> itemOptions){
-        int iteratorCounter = 0;
-        for(Product product : itemOptions){
-            if (productId == product.getProductId()){
-                log.info("User is attempting to add item with id \"{}\" and a quantity of \"{}\"", productId, quantity);
-                addItemToCart(product, quantity);
-                log.info("Product {} with ID {} is added to cart", product.getProductName(), product.getProductId());
-                System.out.println("Item has been added succesfully to cart");
-                iteratorCounter ++;
-                break;
-            }
-        }
 
-        if (iteratorCounter == 0){
-            log.warn("Failed to add Item. Item with id \"{}\" does not exist", productId);
-            System.out.println("Product does not exist");
-        }
-
-
+    public void removeItemToCartByID(ProductItem item) {
+        cart.remove(item);
     }
-
-    @Override
-    public void removeItemToCartByID(int id){
-        CartServiceImpl cart = CartServiceImpl.getInstance();
-        cart.getCart().removeIf(cartItem -> (cartItem.getProduct().getProductId() == id));
-    }
-
 }

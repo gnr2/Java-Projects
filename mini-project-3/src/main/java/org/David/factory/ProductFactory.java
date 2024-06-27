@@ -1,9 +1,9 @@
 package org.David.factory;
 
-import org.David.model.Product;
+import org.David.model.ProductItem;
 
 public class ProductFactory {
-    public static Product createProduct(int productId, String productName, double productPrice){
-        return new Product(productId, productName, productPrice);
+    public static ProductItem createProduct(int productId, String productName, double productPrice){
+        return new ProductItem(productId, productName, productPrice);
     }
 }

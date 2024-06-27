@@ -1,13 +1,17 @@
 package org.David.service;
 
-import org.David.model.Product;
+import org.David.model.ProductItem;
 
 import java.util.ArrayList;
 
 public interface ProductService {
-    ArrayList<Product> searchProductByName(String searchKeyword);
-    ArrayList<Product> getProducts();
+    void searchProduct(String searchKeyword);
+    ArrayList<ProductItem> getProducts();
     void initializeProducts();
     void viewProducts();
-    void printSearchResults(ArrayList<Product> searchResults);
+    void printSearchResults();
+    void viewCart();
+    void addItemToCart(int index, int quantity);
+    void removeItemToCartByID(int index);
+
 }
