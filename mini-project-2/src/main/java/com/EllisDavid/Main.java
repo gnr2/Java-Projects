@@ -76,17 +76,23 @@ public class Main {
                                     throw new IllegalArgumentException("Book title cannot be empty");
                                 }
 
+                                log.info("User entered a book name to the system.");
+
                                 System.out.print("Book Author: ");
                                 String book_author = scan.nextLine().trim();
                                 if (book_author.isEmpty()) {
                                     throw new IllegalArgumentException("Book author cannot be empty");
                                 }
 
+                                log.info("User entered a book author to the system.");
+
                                 System.out.print("Book ISBN: ");
                                 String book_isbn = scan.nextLine().trim();
                                 if (book_isbn.isEmpty()) {
                                     throw new IllegalArgumentException("Book ISBN cannot be empty");
                                 }
+
+                                log.info("User entered a book ISBN to the system.");
 
                                 lib.addBook(book_title, book_author, book_isbn);
                                 isValid = true;
@@ -106,12 +112,15 @@ public class Main {
                                 if (user_input.length() != 1) {
                                     throw new IllegalArgumentException("Invalid input, select only 1 character.");
                                 }
+
                                 redo_choice = user_input.toUpperCase().charAt(0);
                                 if (redo_choice != 'Y' && redo_choice != 'N') {
                                     throw new IllegalArgumentException("Choose among the choices only.");
                                 }
+
                                 isValid = true;
                                 log.info("User chose to add another book: {}", redo_choice);
+
                             } catch (IllegalArgumentException e) {
                                 System.out.println(e.getMessage());
                                 log.error("Error in user input: {}", e.getMessage());
