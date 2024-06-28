@@ -1,4 +1,4 @@
-# Mini Project 2 - Library Management System
+# Java Mini Project 2 - Library Management System
 
 ## Overview
 This project is a simple library management system implemented in Java. It allows users to add, remove, and search for books. The project also includes logging and unit tests.
