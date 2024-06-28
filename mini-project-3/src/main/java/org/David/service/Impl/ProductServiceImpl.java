@@ -149,7 +149,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void removeItemToCartByID(int index){
-        cart.removeItemFromCartByID(instance.getProducts().get(index));
+        cart.removeItemFromCartByID(productItems.get(productItems.get(index));
         System.out.println("Item removed");
     }
 
@@ -239,11 +239,12 @@ public class ProductServiceImpl implements ProductService {
                 System.out.print("Choose the index of item to be removed: ");
                 if (scan.hasNextInt()) {
                     index = scan.nextInt();
+                    instance.removeItemToCartByID(index);
                 } else {
-                    throw new InputMismatchException(" ");
+                    throw new InputMismatchException("Item does not exist");
                 }
 
-                instance.removeItemToCartByID(index);
+
                 isValid = true;
                 scan.nextLine();
             } catch (InputMismatchException e) {

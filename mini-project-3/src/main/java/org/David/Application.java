@@ -46,8 +46,7 @@ public class Application {
                         [5] Remove an Item from the Cart
                         Type [Exit] to Exit the Program
                         
-                        Choice: 
-                        """);
+                        Choice: """);
                 try {
                     userInput = scan.nextLine().trim();
 

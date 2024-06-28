@@ -51,12 +51,7 @@ public class CartServiceImpl implements CartService{
     }
 
     public void addItemToCart(ProductItem item, int quantity){
-        Integer itemValue = cart.get(item);
-        if(itemValue == null){
-            cart.put(item, quantity  );
-        }else{
-            cart.put(item, cart.get(item) + quantity  );
-        }
+        cart.put(item, quantity );
     }
 
 
