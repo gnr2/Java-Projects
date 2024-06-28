@@ -23,15 +23,20 @@ public class CartServiceImpl implements CartService{
         return instance;
     }
 
+    public HashMap<ProductItem, Integer> getCart() {
+        return cart;
+    }
+
     @Override
     public void viewCart(){
         double totalPrice = 0;
         log.info("User viewed items in cart");
         System.out.println("Items in Cart:");
         int i = 0;
+        ProductServiceImpl productService = ProductServiceImpl.getInstance();
         for(var item: cart.keySet()){
             System.out.println();
-            System.out.println("Index: " + i);
+            System.out.println("Index: " + productService.getProductItems().indexOf(item));
             System.out.println("Product ID: " + item.getProductId());
             System.out.println("Product Name: " + item.getProductName());
             System.out.println("Product Price: " + item.getProductPrice());

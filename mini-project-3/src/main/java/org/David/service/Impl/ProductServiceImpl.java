@@ -9,6 +9,7 @@ import org.David.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import java.util.InputMismatchException;
@@ -29,10 +30,6 @@ public class ProductServiceImpl implements ProductService {
         return productItems;
     }
 
-    public void setProductItems(ArrayList<ProductItem> productItems) {
-        this.productItems = productItems;
-    }
-
     public static void setInstance(ProductServiceImpl instance) {
         ProductServiceImpl.instance = instance;
     }
@@ -45,13 +42,6 @@ public class ProductServiceImpl implements ProductService {
         this.searchResults = searchResults;
     }
 
-    public CartService getCart() {
-        return cart;
-    }
-
-    public void setCart(CartService cart) {
-        this.cart = cart;
-    }
 
     private ProductServiceImpl(){
         productItems = new ArrayList<>();
@@ -134,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
         cart.viewCart();
     }
 
-    public void addItemToCart(int index, int quantity) throws IndexOutOfBoundsException {
+    public void addItemToCart(int index, int quantity)  {
         for (ProductItem item : productItems) {
             if (index > productItems.size() - 1 || index < 0) {
                 log.warn("Cannot add item with index {}, Item does not exist", index);
@@ -149,8 +139,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void removeItemToCartByID(int index){
-        cart.removeItemFromCartByID(productItems.get(productItems.get(index));
-        System.out.println("Item removed");
+
+            ProductItem item = productItems.get(index);
+            cart.removeItemFromCartByID(item);
+            log.info("Removing Item {} from the cart", item);
+            System.out.println("Item removed");
+
     }
 
     public void doViewProducts(){
@@ -203,21 +197,29 @@ public class ProductServiceImpl implements ProductService {
             try {
                 System.out.print("Add an item to the cart (index): ");
                 if(scan.hasNextInt()){
-                    if (index >= 0)
-                        index = scan.nextInt();
+                    index = scan.nextInt();
+                    if (index < instance.getProducts().size() && index >= 0 ) {
+                    } else {
+                        throw new InputMismatchException("Item Does not Exist");
+                    }
+
                 } else {
-                    throw new InputMismatchException("");
+                    throw new InputMismatchException("Item does not exist");
                 }
 
                 System.out.print("Add an item to the cart (quantity): ");
                 if(scan.hasNextInt()) {
                     quantity = scan.nextInt();
                     if (quantity <= 0) {
-                        throw new InputMismatchException("");
+                        throw new InputMismatchException("Input a valid quanitity");
+                    } else {
+                        isValid = true;
+                        scan.nextLine();
                     }
+                } else {
+                    throw new InputMismatchException("Input a valid quanitity");
                 }
-                isValid = true;
-                scan.nextLine();
+
             } catch (InputMismatchException e){
                 log.info("Cannot add the Item with index of {}", index);
                 System.out.println(e.getMessage());
@@ -225,6 +227,7 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         instance.addItemToCart(index, quantity);
+        System.out.println("Item has been added to the cart");
         scan.nextLine();
     }
 
@@ -234,16 +237,24 @@ public class ProductServiceImpl implements ProductService {
         boolean isValid = false;
         int index = 0;
 
-        while(!isValid) {
+        if(cart.getCart().isEmpty()){
+            System.out.println("There is nothing to remove\n");
+        } else {
+            while(!isValid) {
             try {
+
                 System.out.print("Choose the index of item to be removed: ");
                 if (scan.hasNextInt()) {
                     index = scan.nextInt();
-                    instance.removeItemToCartByID(index);
+                     if(index < instance.getProducts().size() && index >= 0 ){
+                        instance.removeItemToCartByID(index);
+                    }
+                    else{
+                        throw new InputMismatchException("Item does not exist");
+                    }
                 } else {
                     throw new InputMismatchException("Item does not exist");
                 }
-
 
                 isValid = true;
                 scan.nextLine();
@@ -255,7 +266,7 @@ public class ProductServiceImpl implements ProductService {
 
 
             System.out.println();
-        }
+        }}
     }
 
     public void systemExit(){
