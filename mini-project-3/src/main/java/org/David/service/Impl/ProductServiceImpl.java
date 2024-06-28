@@ -72,16 +72,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void initializeProducts() {
-        productItems.add(ProductFactory.createProduct(24101, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24102, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24103, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24104, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24105, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24106, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24107, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24108, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(24109, "Dell Laptop", 499));
-        productItems.add(ProductFactory.createProduct(241010, "Dell Laptop", 499));
+        productItems.add(ProductFactory.createProduct(24101, "Kare-Kare", 200));
+        productItems.add(ProductFactory.createProduct(24102, "Adobo", 100));
+        productItems.add(ProductFactory.createProduct(24103, "Sinigang", 180));
+        productItems.add(ProductFactory.createProduct(24104, "Porkchop", 120));
+        productItems.add(ProductFactory.createProduct(24105, "Fried Chicken", 120));
+        productItems.add(ProductFactory.createProduct(24106, "Sisig", 110));
+        productItems.add(ProductFactory.createProduct(24107, "Pork Dinakdakan", 150));
+        productItems.add(ProductFactory.createProduct(24108, "Lechon Manok", 150));
+        productItems.add(ProductFactory.createProduct(24109, "Siomai", 109));
+        productItems.add(ProductFactory.createProduct(241010, "Nialaga", 180));
     }
 
     @Override
@@ -149,8 +149,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void removeItemToCartByID(int index){
-        //log.info("User is attempting to remove Product {} with ID of {}", productItems.getProductItem().getProductName(), productItems.getProductItem()..getProductId());
-        cart.removeItemFromCartByID(instance.getProductItems().get(index));
+        cart.removeItemFromCartByID(instance.getProducts().get(index));
         System.out.println("Item removed");
     }
 

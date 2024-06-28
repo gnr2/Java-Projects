@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public void viewCart(){
-        int totalPrice = 0;
+        double totalPrice = 0;
         log.info("User viewed items in cart");
         System.out.println("Items in Cart:");
         int i = 0;
@@ -37,7 +37,7 @@ public class CartServiceImpl implements CartService{
             System.out.println("Product Price: " + item.getProductPrice());
             System.out.println("Quantity: " + cart.get(item));
             i ++;
-            totalPrice += item.getProductPrice();
+            totalPrice += item.getProductPrice() * cart.get(item);
         }
 
         if (totalPrice != 0) {
