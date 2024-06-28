@@ -1,7 +1,7 @@
-# Java Mini-Project 3 Basic E-commerce Management System
+# Java Mini-Project 3 Basic E-commerce Cart System
 
 ## Overview
-This project is a simple e-commerce management system implemented in Java. It allows users to add and remove items to a cart, and search for products in a store. The project also includes logging and unit tests, and applies design patterns singleton and factory.
+This project is a simple e-commerce cart system implemented in Java. It allows users to add and remove items to a cart, and search for products in a store. The project also includes logging and unit tests, and applies design patterns singleton and factory.
 
 ## Features 
 - View a list of available products
