@@ -11,7 +11,7 @@ This project is a simple library management system implemented in Java. It allow
 
 ## Setup
 1. Clone the repository:
-   git clone https://github.com/<USERNAME>/<REPOSITORY>.git
+   git clone https://github.com/gnr2/Java-Projects/mini-project-2.git
 
 2. Navigate to the project directory:
    cd mini-project-2

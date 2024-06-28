@@ -71,7 +71,7 @@ public class ProductServiceImpl implements ProductService {
         productItems.add(ProductFactory.createProduct(24107, "Pork Dinakdakan", 150));
         productItems.add(ProductFactory.createProduct(24108, "Lechon Manok", 150));
         productItems.add(ProductFactory.createProduct(24109, "Siomai", 109));
-        productItems.add(ProductFactory.createProduct(241010, "Nialaga", 180));
+        productItems.add(ProductFactory.createProduct(241010, "Nilaga", 180));
     }
 
     @Override
