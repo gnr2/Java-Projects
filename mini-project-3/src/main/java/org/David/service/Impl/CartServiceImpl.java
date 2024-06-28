@@ -28,16 +28,20 @@ public class CartServiceImpl implements CartService{
         int totalPrice = 0;
         log.info("User viewed items in cart");
         System.out.println("Items in Cart:");
-
+        int i = 0;
         for(var item: cart.keySet()){
+            System.out.println();
+            System.out.println("Index: " + i);
             System.out.println("Product ID: " + item.getProductId());
             System.out.println("Product Name: " + item.getProductName());
             System.out.println("Product Price: " + item.getProductPrice());
             System.out.println("Quantity: " + cart.get(item));
+            i ++;
             totalPrice += item.getProductPrice();
         }
 
         if (totalPrice != 0) {
+            System.out.println();
             System.out.println("Total Balance: " + totalPrice);
         }
         if (cart.isEmpty()){
@@ -56,7 +60,7 @@ public class CartServiceImpl implements CartService{
     }
 
 
-    public void removeItemToCartByID(ProductItem item) {
+    public void removeItemFromCartByID(ProductItem item) {
         cart.remove(item);
     }
 }

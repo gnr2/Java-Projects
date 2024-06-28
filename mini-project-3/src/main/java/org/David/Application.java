@@ -32,28 +32,22 @@ public class Application {
         boolean isValid;
         int index = 0;
 
-//        shop.viewProducts();
-//        shop.searchProduct("106");
-//
-//        shop.viewCart();
-//        shop.addItemToCart(0,1);
-//        shop.addItemToCart(1,2);
-//        shop.addItemToCart(2,3);
-//        shop.viewCart();
-//        shop.addItemToCart(0, 10);
-//        shop.viewCart();
-//        shop.searchProduct("24105");
-//        shop.printSearchResults();
-//        shop.removeItemToCartByID(1);
-//        shop.viewCart();
-
         do {
             isValid = false;
 
+            // User input validation for choice of operation
             while (!isValid) {
-                System.out.println("Mini-Project 3: E-commerce Cart System");
-                System.out.print("[1] View Products \n[2] View Cart \n[3] Search Products\n[4] Add an Item to the Cart " +
-                        "\n[5] Remove an Item from the Cart \nType [Exit] to Exit the Program \nChoice: ");
+                System.out.print("""
+                        Mini-Project 3: E-commerce Cart System
+                        [1] View Products 
+                        [2] View Cart 
+                        [3] Search Products
+                        [4] Add an Item to the Cart 
+                        [5] Remove an Item from the Cart
+                        Type [Exit] to Exit the Program
+                        
+                        Choice: 
+                        """);
                 try {
                     userInput = scan.nextLine().trim();
 
@@ -77,105 +71,27 @@ public class Application {
                 }
             }
 
+
+
             switch(userInput){
-                case "1":
-                    System.out.println();
-                    shop.viewProducts();
-                    System.out.println();
-                    scan.nextLine();
-                    break;
-                case "2":
-                    System.out.println();
-                    shop.viewCart();
-                    System.out.println();
-                    scan.nextLine();
-                    break;
-                case "3":
-                    System.out.println();
-                    isValid = false;
-                    while(!isValid) {
-                        System.out.print("Search for an Item: ");
-                        try {
-                            userInput = scan.nextLine().trim();
-                            if (userInput.isEmpty()) {
-                                throw new InputMismatchException("Provide an input to search for");
-                            }
 
-                            isValid = true;
-                        } catch (Exception e) {
-                            log.info("User searched for an invalid item: {}", userInput);
-                            System.out.println(e.getMessage());
-                            scan.nextLine();
-                        }
-                    }
-                    shop.searchProduct(userInput);
-                    shop.printSearchResults();
-                    System.out.println();
-                    scan.nextLine();
+                case "1": // Case for viewing products in shop
+                    shop.doViewProducts();
                     break;
-                case "4":
-                    int quantity = 0;
-                    isValid = false;
-                    System.out.println();
-                    shop.viewProducts();
-                    while(!isValid) {
-                        try {
-                            System.out.print("Add an item to the cart (index): ");
-                            if(scan.hasNextInt()){
-                                if (index >= 0)
-                                    index = scan.nextInt();
-                            } else {
-                                throw new InputMismatchException("");
-                            }
-
-                            System.out.print("Add an item to the cart (quantity): ");
-                            if(scan.hasNextInt()) {
-                                quantity = scan.nextInt();
-                                if (quantity <= 0) {
-                                    throw new InputMismatchException("");
-                                }
-                            }
-                            isValid = true;
-                            scan.nextLine();
-                        } catch (InputMismatchException e){
-                            log.info("Cannot add the Item with index of {}", index);
-                            System.out.println(e.getMessage());
-                            scan.nextLine();
-                        }
-                    }
-                    shop.addItemToCart(index, quantity);
-                    scan.nextLine();
+                case "2": // Case for viewing user items in cart
+                    shop.doViewCart();
                     break;
-                case "5":
-                    System.out.println();
-                    shop.viewCart();
-                    isValid = false;
-                    while(!isValid) {
-                        try {
-                            System.out.print("Choose the index of item to be removed: ");
-                            if (scan.hasNextInt()) {
-                                index = scan.nextInt();
-                            } else {
-                                throw new InputMismatchException(" ");
-                            }
-
-                            isValid = true;
-                            scan.nextLine();
-                        } catch (InputMismatchException e) {
-                            log.info("Item does not exist: {}", userInput);
-                            System.out.println(e.getMessage());
-                            scan.nextLine();
-                        }
-
-                        shop.removeItemToCartByID(index);
-                        System.out.println();
-                    }
+                case "3": // Case to search for a product in shop
+                    shop.doSearchProduct();
+                    break;
+                case "4": // Case to add an item to cart
+                    shop.doAddItemToCart();
+                    break;
+                case "5": // Case to remove an item from the cart
+                    shop.doRemoveItemFromCart();
                     break;
                 case "exit":
-                    log.info("User chose to close the program");
-                    System.out.println("Application is closing...");
-                    scan.close();
-                    System.exit(0);
+                    shop.systemExit();
                     break;
             }
 

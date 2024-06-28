@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-       <!-- <File name           ="MyFile"
+        <File name           ="MyFile"
               fileName       ="logs.log"
               immediateFlush ="true"
               append         ="false">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </File> -->
+        </File>
+        <!--
         <Console name = "Out">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </Console>
+        </Console> -->
     </Appenders>
     <Loggers>
         <Root level="debug">
-           <!-- <AppenderRef ref="MyFile"/> -->
-            <AppenderRef ref="Out"/>
+            <AppenderRef ref="MyFile"/>
+           <!-- <AppenderRef ref="Out"/> -->
         </Root>
     </Loggers>
 </Configuration>

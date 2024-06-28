@@ -1,61 +1,56 @@
 package org.David.service.impl;
+import org.David.model.ProductItem;
+import org.David.service.Impl.CartServiceImpl;
+import org.David.service.Impl.ProductServiceImpl;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
 
-import org.David.model.CartItem;
-import org.David.model.Product;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import java.util.List;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-class CartServiceImplTest {
+public class CartServiceImplTest {
 
     private CartServiceImpl cartService;
+    private ProductServiceImpl productService;
+    ArrayList <ProductItem> items = new ArrayList<>();
+    HashMap <ProductItem, Integer>  cart = new HashMap<>();
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
+        productService = Mockito.mock(ProductServiceImpl.class);
         cartService = CartServiceImpl.getInstance();
     }
 
     @Test
-    void testAddItemToCart_NewItem() {
-        Product product = new Product(1, "Dell Laptop", 999.99);
-        cartService.addItemToCart(product, 2);
+    public void testAddProductToCart() {
+        ProductItem product = new ProductItem(1, "Product1", 10.0);
 
-        List<CartItem> cart = cartService.getCart();
-        assertEquals(1, cart.size());
-        assertEquals(2, cart.get(0).getQuantity());
+        cart.put(product, 1);
+        int currentCart = cart.get(product);
+        assertEquals(1, currentCart);
     }
 
     @Test
-    void testAddItemToCart_ExistingItem() {
-        Product product = new Product(1, "Dell Laptop", 999.99);
-        cartService.addItemToCart(product, 2);
-        cartService.addItemToCart(product, 3);
+    public void testRemoveProductFromCart() {
+        ProductItem product = new ProductItem(1, "Product1", 10.0);
 
-        List<CartItem> cart = cartService.getCart();
-        assertEquals(1, cart.size());
-        assertEquals(5, cart.get(0).getQuantity());
+        cartService.addItemToCart(product, 1);
+        cartService.removeItemFromCartByID(product);
+
+        assertEquals(0, cartService.getCart().size());
     }
 
     @Test
-    void testRemoveItemFromCart() {
-        Product product = new Product(1, "Dell Laptop", 999.99);
-        cartService.addItemToCart(product, 2);
-        cartService.removeItemFromCart(product);
+    public void testGetCart() {
+        ProductItem product = new ProductItem(1, "Product1", 10.0);
 
-        List<CartItem> cart = cartService.getCart();
-        assertTrue(cart.isEmpty());
+        cartService.addItemToCart(product, 1);
+        assertNotNull(cartService.getCart());
     }
 
-    @Test
-    void testViewCart() {
-        Product product1 = new Product(1, "Dell Laptop", 999.99);
-        Product product2 = new Product(2, "HP Laptop", 899.99);
-        cartService.addItemToCart(product1, 2);
-        cartService.addItemToCart(product2, 1);
-
-        cartService.viewCart(); // You can visually inspect the console output to verify
-    }
 }

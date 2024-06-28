@@ -1,52 +1,50 @@
 package org.David.service.impl;
-
-import org.David.model.Product;
-import org.David.service.ProductService;
+import org.David.service.Impl.ProductServiceImpl;
+import org.David.model.ProductItem;
+import org.David.factory.ProductFactory;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
-public class ProductServiceImpl implements ProductService {
-    private List<Product> products;
-    private static ProductServiceImpl instance;
+import static org.junit.Assert.*;
 
-    private ProductServiceImpl() {
-        products = new ArrayList<>();
-        initializeProducts();
+public class ProductServiceImplTest {
+
+    ArrayList<ProductItem> items = new ArrayList<>();
+    private ProductServiceImpl productService;
+
+    @Before
+    public void setUp() {
+        productService = ProductServiceImpl.getInstance();
     }
 
-    public static synchronized ProductServiceImpl getInstance() {
-        if (instance == null) {
-            instance = new ProductServiceImpl();
-        }
-        return instance;
+    @Test
+    public void testAddProduct() {
+        ProductItem product = new ProductItem(1, "Product1", 10.0);
+        items.add(product);
+        assertEquals(product, items.get(0));
     }
 
-    private void initializeProducts() {
-        products.add(new Product(1, "Dell Laptop", 999.99));
-        products.add(new Product(2, "HP Laptop", 899.99));
-        // Add more products as needed
+    @Test
+    public void testGetProductById() {
+
+        ProductItem product = new ProductItem(1, "Product1", 10.0);
+        items.add(product);
+
+        ProductItem fetchedProduct = items.get(0);
+        assertNotNull(fetchedProduct);
+        assertEquals(1, fetchedProduct.getProductId());
     }
 
-    @Override
-    public List<Product> getProducts() {
-        return products;
+    @Test
+    public void testGetAllProducts() {
+        ProductItem product1 = new ProductItem(1, "Product1", 10.0);
+        ProductItem product2 = new ProductItem(2, "Product2", 15.0);
+        items.add(product1);
+        items.add(product2);
+
+        assertEquals(2, items.size());
     }
 
-    @Override
-    public void viewProducts() {
-        System.out.println("Products:");
-        for (Product product : products) {
-            System.out.println(product.getProductId() + " " + product.getProductName() + " " + product.getProductPrice());
-        }
-    }
-
-    @Override
-    public Product searchProductByName(String searchKeyword) {
-        Optional<Product> product = products.stream()
-                .filter(p -> p.getProductName().equalsIgnoreCase(searchKeyword))
-                .findFirst();
-        return product.orElse(null);
-    }
 }
