@@ -55,6 +55,7 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
+effective-pom.xml
 
 ### Compiled Java classes ###
 *.class
